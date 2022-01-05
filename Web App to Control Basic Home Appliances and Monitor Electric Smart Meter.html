@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>    
+ <link rel="stylesheet" href="bill" type="text/css"/>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+     <body background="black.jpg">
+<style> 
+.flex-container {
+    display: -webkit-flex;
+    display: flex;  
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    text-align: center;
+}
+
+.flex-container > * {
+    padding: 15px;
+    -webkit-flex: 1 100%;
+    flex: 1 100%;
+}
+
+.article {
+    text-align: left;
+}
+
+header {background: black;color:white;}
+footer {background: ;color:white;}
+.nav {background:#eee;}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+.nav ul a {
+    text-decoration: none;
+}
+
+@media all and (min-width: 768px) {
+    .nav {text-align:left;-webkit-flex: 1 auto;flex:1 auto;-webkit-order:1;order:1;}
+    .article {-webkit-flex:5 0px;flex:5 0px;-webkit-order:2;order:2;}
+    footer {-webkit-order:3;order:3;}
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: blue;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+</style>
+
+
+<body> 
+    <div class="flex-container">
+<header>
+  <h1><font color="teal">IOT BASED MONITORING AND CONTROLLING OF HOME APPLIANCES USING WIFI MODULE</font></h1>
+</header>      
+    <div class="container">
+   		<div class="row">
+   			<table style="width:100%" border="1">
+
+				<tr>
+
+					<td colspan="5" valign="middle" width="100%" align="center">
+						<h3><font color="white">Switch ON/OFF Appliances by clicking</font></h3>
+					</td>
+					
+				</tr>
+
+				
+			</table>
+</div>
+        <footer>
+<img src="pic_bulbon.gif" width="100" height="180">
+
+<button id="11" class="led">Bulb</button>
+
+
+
+
+<br><br>
+<img  src="fanoff.gif" width="100" height="180">
+<button id="12" class="led">Fan</button> <!--  This will create the button for pin 12 -->
+
+
+
+<br><br>
+<img src="led.jpg" width="100" height="180"/>
+<button id="13" class="led">Led</button> <!--  This will create the button for pin 13 -->
+
+
+   `
+   
+
+
+<script src="jquery.min.js"></script> <!-- This will read the script from the jquery -->
+<script type="text/javascript">
+$(document).ready(function(){
+  $(".led").click(function(){
+    var p = $(this).attr('id'); // Getting the id value that which pin to toggle, pin 13 or pin 13 or pin 11
+    // Sending the request to the ip address of the server with the pin number to toggle the pin                                                                
+    $.get("http://192.168.4.1:80/", {pin:p}); // Sending the get request
+  });
+});
+</script>
+</footer>
+
+<div class="container">
+   		<div class="row">
+   			<table style="width:100%" border="1">
+
+				<tr>
+
+					<td colspan="5" valign="middle" width="100%" align="center">
+						<h3><font color="white">Check your energy cost</font></h3>
+					</td>
+				</tr>	
+			</table>
+</div>
+
+
+<form action="bill" method ="post">
+    <font color="yellow"><p>Enter Appropriate Number for your Respective Provider</p></font>
+<input type="text" name="x" value="">
+<font color="yellow"><p>Type "1" for Reliance Energy</p></font>
+<font color="yellow"><p>Type "2" for Tata  </p></font>
+<br><br>
+
+<font color="yellow">Bill Duration : <br><br>
+ From Start Date <input type="date" value="" name ="s" >To End Date</font>
+  <input type="date"  value="" name = "t">
+  <br><br>
+  <input type="submit" value="Calculate Cost">
+</form> 
+</body>
+</html>
